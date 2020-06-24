@@ -8,12 +8,12 @@ namespace TodoApi.Tests
 {
     public class IntegrationTest
     {
-        const string BaseUri = "http://localhost:2000/";
+        const string BaseUri = "http://localhost:5000/";
         private readonly ServiceStackHost appHost;
 
         class AppHost : AppSelfHostBase
         {
-            public AppHost() : base(nameof(IntegrationTest), typeof(MyServices).Assembly) { }
+            public AppHost() : base(nameof(IntegrationTest), typeof(TodoServices).Assembly) { }
 
             public override void Configure(Container container)
             {
@@ -37,9 +37,9 @@ namespace TodoApi.Tests
         {
             var client = CreateClient();
 
-            var response = client.Get(new Hello { Name = "World" });
+            var response = client.Get(new GetTodo { Id = 2 });
 
-            Assert.That(response.Result, Is.EqualTo("Hello, World!"));
+            Assert.That(response.Id, Is.EqualTo(2));
         }
     }
 }

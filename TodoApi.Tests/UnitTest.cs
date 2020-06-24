@@ -3,6 +3,7 @@ using ServiceStack;
 using ServiceStack.Testing;
 using TodoApi.ServiceInterface;
 using TodoApi.ServiceModel;
+using TodoApi.ServiceModel.Types;
 
 namespace TodoApi.Tests
 {
@@ -13,7 +14,7 @@ namespace TodoApi.Tests
         public UnitTest()
         {
             appHost = new BasicAppHost().Init();
-            appHost.Container.AddTransient<MyServices>();
+            appHost.Container.AddTransient<TodoServices>();
         }
 
         [OneTimeTearDown]
@@ -22,11 +23,11 @@ namespace TodoApi.Tests
         [Test]
         public void Can_call_MyServices()
         {
-            var service = appHost.Container.Resolve<MyServices>();
+            var service = appHost.Container.Resolve<TodoServices>();
 
-            var response = (HelloResponse)service.Any(new Hello { Name = "World" });
+            var response = (Todo)service.Get(new GetTodo { Id = 2 });
 
-            Assert.That(response.Result, Is.EqualTo("Hello, World!"));
+            Assert.That(response.Id, Is.EqualTo(2));
         }
     }
 }
