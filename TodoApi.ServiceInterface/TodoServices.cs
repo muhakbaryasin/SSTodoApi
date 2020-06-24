@@ -3,6 +3,7 @@ using ServiceStack;
 using ServiceStack.OrmLite;
 using System.Linq;
 using System;
+using TodoApi.ServiceModel.Types;
 
 namespace TodoApi.ServiceInterface
 {

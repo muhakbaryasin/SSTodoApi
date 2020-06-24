@@ -35,7 +35,7 @@ namespace TodoApi
 
     public class AppHost : AppHostBase
     {
-        public AppHost() : base("TodoApi", typeof(MyServices).Assembly) { }
+        public AppHost() : base("TodoApi", typeof(TodoServices).Assembly) { }
 
         // Configure your AppHost with the necessary configuration and dependencies your App needs
         public override void Configure(Container container)

@@ -1,4 +1,5 @@
-﻿using ServiceStack;
+﻿using TodoApi.ServiceModel.Types;
+using ServiceStack;
 using ServiceStack.Data;
 using ServiceStack.OrmLite;
 using ServiceStack.OrmLite.Legacy;

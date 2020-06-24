@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="DeleteTodo.cs~RF1521560.TMP" />
     <None Remove="Todo.cs~RF186d7e8.TMP" />
     <None Remove="Todo.cs~RFe87ce8.TMP" />
   </ItemGroup>
@@ -12,10 +13,6 @@
   <ItemGroup>
     <PackageReference Include="ServiceStack.Interfaces" Version="5.*" />
     <PackageReference Include="ServiceStack.OrmLite" Version="5.9.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Types\" />
   </ItemGroup>
 
 </Project>
