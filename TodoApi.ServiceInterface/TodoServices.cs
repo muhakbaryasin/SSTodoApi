@@ -1,6 +1,8 @@
 ﻿using TodoApi.ServiceModel;
 using ServiceStack;
 using ServiceStack.OrmLite;
+using System.Linq;
+using System;
 
 namespace TodoApi.ServiceInterface
 {
@@ -58,6 +60,43 @@ namespace TodoApi.ServiceInterface
     public object Put(StoreTodo request)
     {
       return Repository.Store(request);
+    }
+
+    public object Put(SetCompletenessPercentageTodo request)
+    {
+      var getTodo = new GetTodo { Id = request.Id };
+      var entry = Repository.Read( getTodo );
+      entry.CompletePercentage = request.CompletePercentage;
+
+      return Repository.Store( entry.ConvertTo<StoreTodo>() );
+    }
+
+    public object Put(SetDoneTodo request)
+    {
+      var getTodo = new GetTodo { Id = request.Id };
+      var entry = Repository.Read(getTodo);
+      entry.CompletePercentage = 100;
+
+      return Repository.Store(entry.ConvertTo<StoreTodo>());
+    }
+
+    public object Get(GetByDateTodo request)
+    {
+      if (request.DateRangeType == DateRangeEnum.TODAY)
+        return Repository.Read().Where(a => a.ExpiryDate.Date == DateTime.Now.Date );
+
+      else if (request.DateRangeType == DateRangeEnum.TOMORROW)
+        return Repository.Read().Where(a => a.ExpiryDate.Date == DateTime.Now.AddDays(1).Date );
+
+      else if (request.DateRangeType == DateRangeEnum.THISWEEK)
+      {
+        var sunday = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek);
+        var saturday = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek + (int)DayOfWeek.Saturday);
+        
+        return Repository.Read().Where(a => a.ExpiryDate.Date >= sunday.Date && a.ExpiryDate.Date <= saturday.Date);
+      }
+
+      return null;
     }
   }
 }
