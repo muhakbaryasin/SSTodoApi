@@ -5,8 +5,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Funq;
 using ServiceStack;
+using ServiceStack.Data;
+using ServiceStack.OrmLite;
 using ServiceStack.Configuration;
 using TodoApi.ServiceInterface;
+using TodoApi.ServiceModel;
 
 namespace TodoApi
 {
@@ -45,6 +48,11 @@ namespace TodoApi
                 DefaultRedirectPath = "/metadata",
                 DebugMode = AppSettings.Get(nameof(HostConfig.DebugMode), false)
             });
+
+            var connectionString = "Data Source=localhost,1433;Initial Catalog=SSTodoApi;User ID=sa;Password=123abcMetnah;";
+
+            container.RegisterAutoWired<TodoRepository>().InitializedBy((arg, repository) => repository.Initialize());
+            container.Register<IDbConnectionFactory>(arg => new OrmLiteConnectionFactory(connectionString, SqlServer2017Dialect.Provider)).ReusedWithin(ReuseScope.Hierarchy);
         }
     }
 }

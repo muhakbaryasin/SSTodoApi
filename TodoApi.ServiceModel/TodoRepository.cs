@@ -11,9 +11,9 @@ namespace TodoApi.ServiceModel
   {
     private IDbConnectionFactory _dbConnectionFactory;
 
-    public TodoRepository(IDbConnectionFactory dbConnectionFactory) {
+    public TodoRepository(IDbConnectionFactory dbConnectionFactory)
+    {
       this._dbConnectionFactory = dbConnectionFactory;
-      Initialize();
     }
 
     private IDbConnectionFactory ConnectionFactory

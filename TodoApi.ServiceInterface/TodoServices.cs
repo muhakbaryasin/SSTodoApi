@@ -10,19 +10,10 @@ namespace TodoApi.ServiceInterface
   public class TodoServices : Service, IGet<GetTodos>, IGet<GetTodo>, IPost<StoreTodo>, IPut<StoreTodo>, IDeleteVoid<DeleteTodo>
   {
     private readonly TodoRepository _todoRepository;
-    /*
+    
     public TodoServices(TodoRepository todoRepository)
     {
       _todoRepository = todoRepository;
-    }
-    */
-
-    public TodoServices()
-    {
-      var connectionString = "Data Source=localhost,1433;Initial Catalog=SSTodoApi;User ID=sa;Password=123abcMetnah;";
-      var dbFactory = new OrmLiteConnectionFactory(connectionString, SqlServer2017Dialect.Provider);
-      
-      _todoRepository = new TodoRepository(dbFactory);
     }
 
     private TodoRepository Repository
