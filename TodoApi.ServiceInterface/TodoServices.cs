@@ -19,7 +19,7 @@ namespace TodoApi.ServiceInterface
 
     public TodoServices()
     {
-      var connectionString = "Data Source=localhost,1433;Initial Catalog=TestTS;User ID=sa;Password=123abcMetnah;";
+      var connectionString = "Data Source=localhost,1433;Initial Catalog=SSTodoApi;User ID=sa;Password=123abcMetnah;";
       var dbFactory = new OrmLiteConnectionFactory(connectionString, SqlServer2017Dialect.Provider);
       
       _todoRepository = new TodoRepository(dbFactory);
