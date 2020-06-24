@@ -41,4 +41,30 @@ namespace TodoApi.ServiceModel
     public string Description { get; set; }
     public int CompletePercentage { get; set; }
   }
+
+  [Route("/api/todos/complete/{Id}/value/{CompletePercentage}", "PUT")]
+  public class SetCompletenessPercentageTodo : IReturn<Todo>
+  {
+    public int Id { get; set; }
+    public int CompletePercentage { get; set; }
+  }
+
+  [Route("/api/todos/complete/{Id}", "PUT")]
+  public class SetDoneTodo : IReturn<Todo>
+  {
+    public int Id { get; set; }
+  }
+
+  [Route("/api/todos/getbydate/{DateRangeType}", "GET")]
+  public class GetByDateTodo : IReturn<List<Todo>>
+  {
+    public DateRangeEnum DateRangeType { get; set; }
+  }
+
+  public enum DateRangeEnum
+  {
+    TODAY,
+    TOMORROW,
+    THISWEEK
+  }
 }
